@@ -1,0 +1,235 @@
+:root {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --primary-color: #bb86fc;
+  --primary-variant: #3700b3;
+  --secondary-color: #03dac6;
+  --error-color: #cf6679;
+  --on-background: #ffffff;
+  --on-surface: #e1e1e1;
+  --on-primary: #000000;
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--on-background);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* --- Typography --- */
+h1, h2, h3 {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* --- Views --- */
+.view {
+  display: none;
+  animation: fadeIn var(--transition-speed) ease-in-out;
+}
+
+.view.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Forms & Inputs --- */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--on-surface);
+  font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="url"],
+textarea {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--surface-color);
+  border: 1px solid #333;
+  border-radius: var(--border-radius);
+  color: var(--on-background);
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color var(--transition-speed);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(187, 134, 252, 0.2);
+}
+
+/* --- Buttons --- */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--on-primary);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 12px rgba(187, 134, 252, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--surface-color);
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(3, 218, 198, 0.1);
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+}
+
+.btn-danger:hover {
+  background-color: rgba(207, 102, 121, 0.1);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* --- Cards (Vault Entries) --- */
+.entry-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.entry-card {
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.entry-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.entry-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--on-background);
+}
+
+.entry-username {
+  color: var(--on-surface);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.entry-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* --- Toast Notifications --- */
+#toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.toast {
+  background-color: var(--surface-color);
+  color: var(--on-background);
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  border-left: 4px solid var(--primary-color);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* --- Utilities --- */
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.mt-2 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 2rem; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+
+/* --- Password Generator Specifics --- */
+.strength-meter {
+  height: 4px;
+  background: #333;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.strength-bar {
+  height: 100%;
+  width: 0;
+  transition: width 0.3s, background-color 0.3s;
+}

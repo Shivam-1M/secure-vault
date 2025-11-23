@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Vault</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Login View -->
+    <div id="login-view" class="view active">
+      <h1>Secure Vault</h1>
+      <div class="card" style="max-width: 400px; margin: 0 auto;">
+        <p class="text-center" style="color: var(--on-surface); margin-bottom: 2rem;">
+          Enter your master password to unlock your vault.<br>
+          <span style="font-size: 0.85rem; color: #888;">(If this is your first time, this will set your new master password)</span>
+        </p>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="master-password">Master Password</label>
+            <input type="password" id="master-password" placeholder="••••••••••••" required autofocus>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Unlock Vault</button>
+        </form>
+        <p id="login-error" style="color: var(--error-color); text-align: center; margin-top: 1rem; display: none;"></p>
+      </div>
+    </div>
+
+    <!-- Vault View -->
+    <div id="vault-view" class="view">
+      <div class="flex-between mb-2">
+        <h2>My Vault</h2>
+        <div style="display: flex; gap: 1rem;">
+          <button id="btn-sync" class="btn btn-secondary" title="Sync to Cloud">
+            ☁️ Sync
+          </button>
+          <button id="btn-add-entry" class="btn btn-primary">
+            <span>+</span> Add Entry
+          </button>
+          <button id="btn-lock" class="btn btn-secondary">Lock</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="search-input" placeholder="Search vault..." style="margin-bottom: 1rem;">
+      </div>
+
+      <div id="vault-list" class="entry-list">
+        <!-- Entries will be injected here -->
+      </div>
+      
+      <div id="empty-state" class="text-center mt-2 hidden">
+        <p style="color: var(--on-surface);">No entries found. Create your first one!</p>
+      </div>
+    </div>
+
+    <!-- Add/Edit Entry View -->
+    <div id="entry-view" class="view">
+      <div class="flex-between mb-2">
+        <h2 id="entry-view-title">Add New Entry</h2>
+        <button id="btn-cancel-entry" class="btn btn-secondary">Cancel</button>
+      </div>
+      
+      <form id="entry-form">
+        <div class="form-group">
+          <label for="entry-title">Title</label>
+          <input type="text" id="entry-title" placeholder="e.g. Google Account" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="entry-username">Username / Email</label>
+          <input type="text" id="entry-username" placeholder="user@example.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="entry-password">Password</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="entry-password" placeholder="Password" required>
+            <button type="button" id="btn-generate-pass" class="btn btn-secondary" title="Generate">🎲</button>
+          </div>
+          <div class="strength-meter"><div id="strength-bar" class="strength-bar"></div></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="entry-url">URL</label>
+          <input type="url" id="entry-url" placeholder="https://example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="entry-folder">Folder</label>
+          <input type="text" id="entry-folder" placeholder="e.g. Social, Work">
+        </div>
+        
+        <div class="form-group">
+          <label for="entry-notes">Notes</label>
+          <textarea id="entry-notes" rows="4" placeholder="Additional details..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Save Entry</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
