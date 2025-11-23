@@ -30,3 +30,8 @@ target/
 # Tauri
 src-tauri/target/
 src-tauri/gen/
+
+# Security & Data
+*.dat
+.env
+.env.*
